@@ -57,3 +57,11 @@ def health():
 @app.get("/boom")
 def boom():
     1 / 0 
+
+READY = True 
+
+@app.get("/ready")
+def ready():
+    if not READY:
+        return JSONResponse(status_code=503,content={"status":"not_ready"})
+    return {"status":"ready"}
