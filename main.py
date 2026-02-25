@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Request
 from fastapi.responses import JSONResponse
+from schemas import QueryRequest
 import time 
 import uuid
 import json 
@@ -65,3 +66,7 @@ def ready():
     if not READY:
         return JSONResponse(status_code=503,content={"status":"not_ready"})
     return {"status":"ready"}
+
+@app.post("/query")
+async def query(request: QueryRequest):
+    return {"you_asked":request.query}
