@@ -1,6 +1,7 @@
 from fastapi import FastAPI,Request
 from fastapi.responses import JSONResponse
 from schemas import QueryRequest
+from rag.service import generate_answer 
 import time 
 import uuid
 import json 
@@ -69,4 +70,5 @@ def ready():
 
 @app.post("/query")
 async def query(request: QueryRequest):
-    return {"you_asked":request.query}
+      answer = generate_answer(req.query)
+      return {"answer":answer}
